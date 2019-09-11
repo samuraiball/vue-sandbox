@@ -1,0 +1,21 @@
+フォルダー パスの一覧:  ボリューム Windows
+ボリューム シリアル番号は 665D-3E29 です
+hello-world-counter
+│  .gitignore
+│  babel.config.js
+│  package.json
+│  README.md
+├─node_modules
+├─public
+│      favicon.ico
+│      index.html
+└─src
+    │  App.vue
+    │  main.js
+    │
+    ├─assets
+    │      logo.png
+    │
+    └─components
+            HelloWorld.vue
+
