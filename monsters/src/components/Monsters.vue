@@ -7,7 +7,8 @@
                 v-bind:key="monster.id"
                 v-bind:class="{tuyoi: monster.hp > 300}">
                 ID.{{ monster.id }} {{ monster.name }} {{ monster.hp }}
-                <span v-if="monster.hp > 300">つよい!!!!</span>
+                <span v-if="monster.hp < 50">瀕死!!!!</span>
+                <button v-on:click="doAttack(index)">攻撃(10)</button>
                 <button v-on:click="doRemove(index)">モンスターを削除</button>
             </li>
         </ul>
@@ -42,6 +43,9 @@
             },
             doRemove(index) {
                 this.monsters.splice(index, 1)
+            },
+            doAttack(index){
+                this.monsters[index].hp -= 10
             }
         }
     }
