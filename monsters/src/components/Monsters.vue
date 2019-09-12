@@ -3,11 +3,12 @@
         <input v-model="name">
         <button v-on:click="addMonster">モンスターを追加</button>
         <ul>
-            <li v-for="monster in monsters"
+            <li v-for="(monster, index) in monsters"
                 v-bind:key="monster.id"
                 v-bind:class="{tuyoi: monster.hp > 300}">
                 ID.{{ monster.id }} {{ monster.name }} {{ monster.hp }}
                 <span v-if="monster.hp > 300">つよい!!!!</span>
+                <button v-on:click="doRemove(index)">モンスターを削除</button>
             </li>
         </ul>
     </div>
@@ -18,6 +19,7 @@
         name: "monsters",
         data() {
             return {
+                name: 'キマイラ',
                 monsters: [
                     {id: 1, name: 'スライム', hp: 200},
                     {id: 2, name: 'ゴブリン', hp: 300},
@@ -26,17 +28,20 @@
                 ]
             }
         },
-        methods:{
+        methods: {
             addMonster: function () {
                 const max = this.monsters.reduce(
                     function (a, b) {
-                        return b.id ? a: b.id
+                        return a > b.id ? a : b.id
                     }, 0)
                 this.monsters.push({
                     id: max + 1,
                     name: this.name,
                     hp: 500
                 })
+            },
+            doRemove(index) {
+                this.monsters.splice(index, 1)
             }
         }
     }
