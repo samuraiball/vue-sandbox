@@ -2,6 +2,8 @@
     <div>
         <div v-for="(brave, index) in braveList.braves" v-bind:key="brave.id">
             {{brave.name}}
+            <span v-for="n of brave.hp/100 "
+                  v-bind:style="{color: brave.hp < 200 ? 'red' : 'black'}">■</span>
         </div>
 
         <div v-for="(monster, index) in monsterList.monsters">

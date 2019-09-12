@@ -1,13 +1,12 @@
 <template>
     <div>
-        <div
-                v-for="(monster, index) in monsterList.monsters"
-                v-bind:key="monster.id">
-
-            {{ monster.name}}
-            <span v-for="n of monster.hp/100 "
-                  v-bind:style="{color: monster.hp < 200 ? 'red' : 'black'}">■</span>
-
+        <div v-for="(monster, index) in monsterList.monsters"
+             v-bind:key="monster.id">
+            <div>
+                {{ monster.name}}
+                <span v-for="n of monster.hp/100 "
+                      v-bind:style="{color: monster.hp < 200 ? 'red' : 'black'}">■</span>
+            </div>
         </div>
     </div>
 </template>
