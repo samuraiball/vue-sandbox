@@ -25,17 +25,22 @@
         }),
         methods: {
             doAttack(index) {
-                //fixme ランダムで攻撃するように
-                this.$store.dispatch('braves/doAttack', 0);
+
+                //攻撃対象をランダムで選出
+                const target = Math.floor(Math.random() * this.braveList.braves.length);
+
+                this.$store.dispatch('braves/doAttack', target);
                 this.$store.dispatch('monsters/didAttack', index);
 
+                // すべてのモンスターが攻撃が終わっているか確認
                 let allAttacked = true;
-                for(const monster of this.monsterList.monsters){
-                    if(!monster.didAttack){
-                        allAttacked  = false;
+                for (const monster of this.monsterList.monsters) {
+                    if (!monster.didAttack) {
+                        allAttacked = false;
                     }
                 }
 
+                // 攻撃が終わっていればターン終了
                 if (allAttacked) {
                     this.$store.dispatch('braves/resetDidAttackState')
                 }

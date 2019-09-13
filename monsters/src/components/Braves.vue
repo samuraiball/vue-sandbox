@@ -30,6 +30,7 @@
                 this.$store.dispatch('monsters/doAttack', idMonster)
                 this.$store.dispatch('braves/didAttack', idBrave)
 
+                // すべての勇者が攻撃を終わっているか確認
                let allAttacked = true;
                 for(const brave of this.braveList.braves){
                     if(!brave.didAttack){
@@ -37,6 +38,7 @@
                     }
                 }
 
+                // 攻撃が終わっていればターン終了
                 if (allAttacked) {
                     this.$store.dispatch('monsters/resetDidAttackState')
                 }
