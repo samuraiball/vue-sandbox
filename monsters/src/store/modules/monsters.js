@@ -31,7 +31,6 @@ const actions = {
 
 const mutations = {
     doAttack(state, attackProps) {
-        console.log(attackProps)
         const tmp = state.monsters[attackProps.targetId].hp -= attackProps.damage
         if (tmp <= 0) {
             state.monsters.splice(attackProps.targetId, 1)

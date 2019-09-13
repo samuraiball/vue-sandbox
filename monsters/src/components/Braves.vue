@@ -24,7 +24,8 @@
         components: {Monsters},
         computed: mapState({
             braveList: state => state.braves,
-            monsterList: state => state.monsters
+            monsterList: state => state.monsters,
+            battleEvent: state => state.battleEvent
         }),
         methods: {
             doAttack(targetId, damage, attackerId) {
@@ -41,12 +42,9 @@
 
                 // 攻撃が終わっていればターン終了
                 if (allAttacked) {
-                    this.$store.dispatch('monsters/resetDidAttackState')
+
+                    this.$store.dispatch('battleEvent/toggleTurn')
                 }
-                console.log('aaaaaaaaa')
-            },
-            resetDidAttackState() {
-                this.$store.dispatch('braves/resetDidAttackState')
             }
         }
     }

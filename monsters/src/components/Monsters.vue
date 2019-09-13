@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(monster, index) in monsterList.monsters"
+        <div v-for="monster in monsterList.monsters"
              v-bind:key="monster.id">
             <div>
                 {{ monster.name}}
@@ -9,8 +9,8 @@
 
                     ■</span>
             </div>
-            <button v-if="!monster.didAttack" v-on:click="doAttack(index, monster.offensivePower)">勇者を攻撃</button>
         </div>
+        <button v-if="!battleEvent.bravesTurn" v-on:click="doAttack()">勇者を攻撃</button>
     </div>
 </template>
 
@@ -21,29 +21,21 @@
         name: "monsters",
         computed: mapState({
             monsterList: state => state.monsters,
-            braveList: state => state.braves
+            braveList: state => state.braves,
+            battleEvent: state => state.battleEvent
         }),
         methods: {
-            doAttack(attackerId, damage) {
-
+            doAttack() {
                 //攻撃対象をランダムで選出
-                const targetId = Math.floor(Math.random() * this.braveList.braves.length);
+                for (let monster of this.monsterList.monsters) {
+                    const targetId = Math.floor(Math.random() * this.braveList.braves.length);
+                    this.$store.dispatch('braves/doAttack', {targetId: targetId, damage: monster.offensivePower});
 
-                this.$store.dispatch('braves/doAttack', {targetId: targetId, damage: damage});
-                this.$store.dispatch('monsters/didAttack', attackerId);
-
-                // すべてのモンスターが攻撃が終わっているか確認
-                let allAttacked = true;
-                for (const monster of this.monsterList.monsters) {
-                    if (!monster.didAttack) {
-                        allAttacked = false;
-                    }
                 }
 
-                // 攻撃が終わっていればターン終了
-                if (allAttacked) {
-                    this.$store.dispatch('braves/resetDidAttackState')
-                }
+                // ターン終了後勇者の攻撃フラグをONに
+                this.$store.dispatch('battleEvent/toggleTurn')
+                this.$store.dispatch('braves/resetDidAttackState')
             }
         }
     }
