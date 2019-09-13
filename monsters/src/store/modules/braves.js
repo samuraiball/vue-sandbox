@@ -6,27 +6,28 @@ const state = {
 }
 
 const actions = {
-    doAttack(context, index ) {
+    doAttack(context, index) {
         context.commit('doAttack', index)
     },
     didAttack(context, index) {
         context.commit('didAttack', index)
     },
-    resetDidAttackState(context){
-        context.commit('resetAttackState')
+    resetDidAttackState(context) {
+        context.commit('resetDidAttackState')
     }
 }
 
 const mutations = {
     doAttack(state, index) {
-        if (state.braves[index].hp -= 100) {
+        const tmp = state.braves[index].hp -= 100
+        if (tmp <= 0) {
             state.braves.splice(index, 1)
         }
     },
     didAttack(state, index) {
         state.braves[index].didAttack = true;
     },
-    resetAttackState(state) {
+    resetDidAttackState(state) {
         for (let brave of state.braves) {
             brave.didAttack = false;
         }
