@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div v-for="(brave, index) in braveList.braves" v-bind:key="brave.id">
+        <div v-for="(brave, indexBrave) in braveList.braves" v-bind:key="brave.id">
             {{brave.name}}
-            <span v-for="n of brave.hp/100 "
+            <span v-for="_ of brave.hp/100"
                   v-bind:style="{color: brave.hp < 200 ? 'red' : 'black'}">■</span>
+            <div v-if="!brave.didAttack" v-for="(monster, indexMonster) in monsterList.monsters">
+                <button v-on:click="doAttack(indexMonster, indexBrave)">{{monster.name}}を攻撃</button>
+            </div>
         </div>
-
-        <div v-for="(monster, index) in monsterList.monsters">
-            <button v-on:click="doAttack(index)">{{monster.name}}を攻撃</button>
-        </div>
+        <button v-on:click="resetDidAttackState" > reset</button>
     </div>
 </template>
 
@@ -24,8 +24,12 @@
             monsterList: state => state.monsters
         }),
         methods: {
-            doAttack(id) {
-                this.$store.dispatch('monsters/doAttack', id)
+            doAttack(idMonster, idBrave) {
+                this.$store.dispatch('monsters/doAttack', idMonster)
+                this.$store.dispatch('braves/didAttack', idBrave)
+            },
+            resetDidAttackState(){
+                this.$store.dispatch('braves/resetDidAttackState')
             }
         }
     }
