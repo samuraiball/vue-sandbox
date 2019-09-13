@@ -9,7 +9,7 @@
 
                     ■</span>
             </div>
-            <button v-if="!monster.didAttack" v-on:click="doAttack(index)">勇者を攻撃</button>
+            <button v-if="!monster.didAttack" v-on:click="doAttack(index, monster.offensivePower)">勇者を攻撃</button>
         </div>
     </div>
 </template>
@@ -24,13 +24,13 @@
             braveList: state => state.braves
         }),
         methods: {
-            doAttack(index) {
+            doAttack(attackerId, damage) {
 
                 //攻撃対象をランダムで選出
-                const target = Math.floor(Math.random() * this.braveList.braves.length);
+                const targetId = Math.floor(Math.random() * this.braveList.braves.length);
 
-                this.$store.dispatch('braves/doAttack', target);
-                this.$store.dispatch('monsters/didAttack', index);
+                this.$store.dispatch('braves/doAttack', {targetId: targetId, damage: damage});
+                this.$store.dispatch('monsters/didAttack', attackerId);
 
                 // すべてのモンスターが攻撃が終わっているか確認
                 let allAttacked = true;
