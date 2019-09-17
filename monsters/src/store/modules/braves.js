@@ -1,6 +1,6 @@
 const state = {
     braves: [
-        {id: 1, name: '西修羅', hp: 5000, didAttack: false, offensivePower: 300},
+        {id: 1, name: '西修羅', hp: 2000, didAttack: false, offensivePower: 300},
         {id: 2, name: 'へのへのもへじ', hp: 100, didAttack: false, offensivePower: 100},
         {id: 3, name: 'ボーイ', hp: 1000, didAttack: false, offensivePower: 200}
     ]

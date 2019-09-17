@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="monster in monsterList.monsters"
+        <div class="monster" v-for="monster in monsterList.monsters"
              v-bind:key="monster.id">
             <div>
                 {{ monster.name}}
@@ -10,7 +10,7 @@
                     ■</span>
             </div>
         </div>
-        <button v-if="!battleEvent.bravesTurn" v-on:click="doAttack()">勇者を攻撃</button>
+        <button v-if="!battleEvent.bravesTurn" v-on:click="doAttack">勇者を攻撃</button>
     </div>
 </template>
 
@@ -42,5 +42,12 @@
 </script>
 
 <style scoped>
+    .monster{
+        display: inline-block;
+        width: 300px;
+        background-color: darkgray;
+        padding: 20px;
+        height: 100px;
+    }
 
 </style>

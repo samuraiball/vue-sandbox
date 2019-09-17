@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(brave, braveIndex) in braveList.braves" v-bind:key="brave.id">
+        <div class="brave" v-for="(brave, braveIndex) in braveList.braves" v-bind:key="brave.id">
             {{brave.name}}
 
             <span v-for="_ of brave.hp/100"
@@ -51,5 +51,11 @@
 </script>
 
 <style scoped>
+    .brave {
+        display: inline-block;
+        background-color: bisque;
+        padding: 20px;
+        height: 100px;
+    }
 
 </style>

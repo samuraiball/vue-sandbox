@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <div>
-            <Monsters/>
+        <Monsters/>
+        <div class="braves">
+            <Braves/>
         </div>
-        <Braves/>
     </div>
 </template>
 
@@ -29,5 +29,9 @@
         text-align: center;
         color: #2c3e50;
         margin-top: 60px;
+    }
+    .braves{
+        position: absolute;
+        right: 500px;
     }
 </style>
